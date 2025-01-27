@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            background-color: #222;
+            color: #fff;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            background-color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff0080;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(255, 0, 128, 0.4);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff3399;
+            transform: scale(1.05);
+        }
+
+        #dogImage {
+            display: none;
+            margin-top: 20px;
+            border: 2px solid #ff0080;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+        }
+
+        #output {
+            margin: 20px 0;
+            font-size: 18px;
+            text-shadow: 0 0 10px rgba(255, 0, 128, 0.7);
+        }
+
+        #test {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="userName" placeholder="Введи своё имя">
+    <button onclick="startTest()">Начать тест</button>
+    <div id="test">
+        <p id="output"></p>
+        <button onclick="submitTest()">Узнать</button>
+        <img id="dogImage" width="600" height="600" alt="Порода собаки">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dogBreeds = {
+                "Тимур": { breed: "Мопс", image: "Мопс.jpg" },
+                "Никита": { breed: "Австралийская пастушья собака", image: "Австралийская пастушья собака.jpg" },
+                "Руслан": { breed: "Аляскинский маламут", image: "Аляскинский маламут.jpg" },
+                "Михаил": { breed: "Английский бульдог", image: "Английский бульдог.jpeg" },
+                "Егор": { breed: "Лабрадор-ретривер", image: "Лабрадор-ретривер.jpeg" },
+                "Антон": { breed: "Немецкая овчарка", image: "Немецкая овчарка.jpg" },
+                "Мирослав": { breed: "Опоссум", image: "Оппосум.jpg" },
+                "Максим": { breed: "Пудель", image: "Пудель.jpg" },
+                "Алексей": { breed: "Французский бульдог", image: "Французский бульдог.jpg" },
+                "своё имя": { breed: "долбаёб", image: "ты.jpg" },
+            };
+
+            window.startTest = function() {
+                const name = document.getElementById('userName').value;
+                if (name) {
+                    document.getElementById('test').style.display = 'block';
+                    document.getElementById('output').innerText = 'Ну что, ' + name + '! Хочешь узнать свою породу?';
+                } else {
+                    alert('Введи своё имя.');
+                }
+            };
+
+            window.submitTest = function() {
+                const name = document.getElementById('userName').value;
+                const breedInfo = dogBreeds[name];
+                if (breedInfo) {
+                    document.getElementById('output').innerText = 'Твоя порода: ' + breedInfo.breed;
+                    const img = document.getElementById('dogImage');
+                    img.src = breedInfo.image;
+                    img.style.display = 'block';
+                } else {
+                    document.getElementById('output').innerText = 'Сорян, нейронка не смогла найти пёселя для этого человека.';
+                }
+            };
+        });
+    </script>
+</body>
+</html>
